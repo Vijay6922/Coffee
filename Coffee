@@ -1,0 +1,82 @@
+class coffee:
+        def __init__(self):
+                self.ch=0
+                self.choice=0
+                self.n=1
+        
+        def avail_coffee(self):
+                print("available coffeee:")
+                print("---------------------")
+                print("1.Espresso")
+                print("2.Cappuccino")
+                print("3.Latte\n")
+        def avail_addon(self):
+                print("Available addons")
+                print("---------------------")
+                print("Milk")
+                print("Cream")
+                print("Latte")
+
+        def select_addon(self):
+                self.avail_addon()
+                print("which add on do you prefer:/n")
+                self.ch=int(input("enter your addon choice (1/2/3)-->"))
+
+                while (self.ch not in [1,2,3]):
+                        self.ch=int(input("enter valid addon choice(1/2/3)-->"))
+                print()
+        def select_coffee(self):
+                self.avail_coffee()
+                print("Which coffee do you prefer:\n")
+                
+                self.choice=int(input("enter your choice (1/2/3)-->"))
+                while(self.choice not in [1,2,3]):
+                        self.choice=int(input("enter valid choice(1/2/3)-->"))
+                print()
+                self.select_addon()
+                self.n=int(input("how many number of cups you prefer-->"))
+                
+        
+                
+class bill(coffee):
+        def __init__(self,name):
+                
+                coffee.__init__(self)
+                self.name=name
+                
+                self.total_bill=0
+                self.a=[[60,75,100],[80,90,125],[100,125,150]]
+        def total(self):
+                self.total_bill+=(self.a[self.choice-1][self.ch-1])*self.n
+
+        def display_bill(self):
+                self.total()
+                print("your total bill is :",self.total_bill)
+                
+                
+        def any_more(self):
+                
+                y=input("do you want any thing else (yes/no)-->")
+                while (y not in ["yes","no"]):
+                        y=input("Enter valid option (yes/no)-->")
+                an=False
+                if(y=="yes"):
+                        an=True
+                        while(an):
+                                self.select_coffee()
+                                self.display_bill()
+                                y=input("anything else (yes/no)-->")
+                                while(y not in ["yes","no"]):
+                                        y=input("Enter valid option (yes/no)")         
+                                if(y=="no"):
+                                        print("Thank you "+self.name+" visit again")
+                                        an=False
+                else:
+                        print("Thank you "+self.name+" visit again")
+                          
+                
+name=input("Enter your name please -->")
+Vijay=bill(name)
+Vijay.select_coffee()
+Vijay.display_bill()
+Vijay.any_more()
